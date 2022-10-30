@@ -1,9 +1,13 @@
-#!/usr/bin/env python3
+# #!/usr/bin/env python3
+
 """
 A model that implements base model class
 """
 from datetime import datetime
+import imp
+
 import uuid
+
 
 class BaseModel:
 	"""
@@ -14,9 +18,19 @@ class BaseModel:
 		A fuction that defines the instance attributes
 
 		"""
-		self.id = str(uuid.uuid4())
-		self.created_at = datetime.now()
-		self.updated_at = datetime.now()
+		from models import storage
+		if not kwargs:
+			self.id = str(uuid.uuid4())
+			self.created_at = datetime.now()
+			self.updated_at = datetime.now()
+			storage.new(self)
+		else:
+			for key, value in kwargs.items():
+				if key != '__class__':
+					if key in ('created_at', 'updated_at'):
+						setattr(self, key, datetime.fromisoformat(value))
+					else:
+						setattr(self, key, value)
 	
 	
 	def __str__(self):
@@ -30,7 +44,9 @@ class BaseModel:
 		"""
         Updates 'self.updated_at' with the current datetime
         """
+		from models import storage
 		self.updated_at = datetime.now()
+		storage.save()
 	
 	def to_dict(self):
 		"""
