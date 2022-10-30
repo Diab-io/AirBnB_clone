@@ -1,4 +1,4 @@
-#!/usr/bin/env python3
+# #!/usr/bin/env python3
 """
 A model that implements base model class
 """
@@ -9,7 +9,7 @@ class BaseModel:
 	"""
 	A class that deines all common attributes/methods for other classes
 	"""
-	def __init__(self, id=0):
+	def __init__(self, *args, **kwargs):
 		"""
 		A fuction that defines the instance attributes
 
@@ -24,7 +24,7 @@ class BaseModel:
         Returns the string representation of BaseModel object.
         [<class name>] (<self.id>) <self.__dict__>
         """
-		print(f"[{type(self).__name__}] ({self.id}) <{self.__dict__}>")
+		return "[{}] ({}) <{}>".format(type(self).__name__, self.id, self.__dict__)
 
 	def save(self):
 		"""
