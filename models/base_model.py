@@ -1,4 +1,4 @@
-# #!/usr/bin/env python3
+#!/usr/bin/env python3
 """
 A module that implements the base model class
 """
@@ -30,9 +30,3 @@ class BaseModel:
                 value = newdict[key].isoformat()
                 newdict[key] = value
         return newdict
-
-
-b = BaseModel()
-print(b.to_dict())
-print("==============")
-print(b.__str__())
