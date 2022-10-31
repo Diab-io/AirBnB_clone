@@ -1,9 +1,8 @@
-#!/usr/bin/env python3
+# #!/usr/bin/env python3
 """
 A module that implements the base model class
 """
 from datetime import datetime
-import time
 from uuid import uuid4
 
 
